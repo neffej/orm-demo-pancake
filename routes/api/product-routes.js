@@ -4,9 +4,21 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
+  try{
+    const products = await Product.findAll({
+      include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'tag_id'} ],
+    });
+    if (!products){
+      res.status(404).json({ message: 'Database error - no products were found!'})
+    return;
+  }
+  res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // get one product
