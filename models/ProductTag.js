@@ -7,6 +7,7 @@ const Product = require('./Product');
 
 class ProductTag extends Model {}
 
+// This creates a junction table for Many-to-many associations
 ProductTag.init(
   {
     // define columns
@@ -19,14 +20,14 @@ ProductTag.init(
     product_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: Product,
+        model: 'product',
         key: 'id'
       }
     },
     tag_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: Tag,
+        model: 'tag',
         key: 'id'
       }
     }
