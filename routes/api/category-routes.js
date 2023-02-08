@@ -52,23 +52,23 @@ router.post('/', async (req, res) => {
 router.put('/:id', async(req, res) => {
   // update a category by its `id` value
   console.log(req.body)
-//   try{
-//     const categoryID = await Category.update(req.body, {
-//     where: {
-//       id: req.params.id,
-//     },
-//   });
+  try{
+    const categoryID = await Category.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  });
 
-//   if(!categoryID){
-//     res.status(404).json({ message: "No category found with this id"});
-//     return;
-//   }
+  if(!categoryID){
+    res.status(404).json({ message: "No category found with this id"});
+    return;
+  }
 
-//   console.log("\u001b[36mCategory Updated")
-//   res.status(200).json(categoryID);
-// } catch(err){
-//   res.status(500).json(err);
-// }
+  console.log("\u001b[36mCategory Updated")
+  res.status(200).json(categoryID);
+} catch(err){
+  res.status(500).json(err);
+}
 });
 
 
